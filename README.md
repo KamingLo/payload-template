@@ -42,15 +42,17 @@ The Payload config is tailored specifically to the needs of most websites. It is
 
 See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
 
-- #### Users (Authentication)
+Koleksi Payload CMS diatur berdasarkan struktur folder berikut:
+- **Fitur Utama CMS** (di root `src/collections/`): `Users`, `Media`, `Pages`
+- **Komponen Kecil** (di `src/collections/components/`): `HeroBento`, `CategoryBentoGrid`
+- **Komponen Global Kecil** (di `src/collections/components/global/`): `NavbarLiquid`, `FooterGlobal`
 
-  Users are auth-enabled collections that have access to the admin panel.
+#### Daftar Koleksi Utama
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/3.x/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+- **Users (Authentication)**: Koleksi untuk autentikasi user yang memiliki akses ke admin panel.
+- **Media**: Koleksi untuk upload media (gambar/file).
+- **Pages**: Koleksi untuk mengelola halaman dinamis.
 
-- #### Media
-
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
 
 ### Docker
 

@@ -69,6 +69,9 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    pages: Page;
+    'navbar-liquid': NavbarLiquid;
+    'footer-global': FooterGlobal;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +81,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    'navbar-liquid': NavbarLiquidSelect<false> | NavbarLiquidSelect<true>;
+    'footer-global': FooterGlobalSelect<false> | FooterGlobalSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -163,6 +169,138 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  slug: string;
+  layout?:
+    | (
+        | {
+            title: string;
+            subtitle?: string | null;
+            description: string;
+            ctaText: string;
+            ctaLink: string;
+            image?: (number | null) | Media;
+            features?:
+              | {
+                  title: string;
+                  value: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'heroUtama';
+          }
+        | {
+            title: string;
+            subtitle?: string | null;
+            description: string;
+            ctaText?: string | null;
+            ctaLink?: string | null;
+            image?: (number | null) | Media;
+            alignment?: ('left' | 'right') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'heroSekunder';
+          }
+        | {
+            title: string;
+            items?:
+              | {
+                  name: string;
+                  description?: string | null;
+                  badge?: string | null;
+                  image?: (number | null) | Media;
+                  link?: string | null;
+                  size?: ('small' | 'medium' | 'large') | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'gridPromosiProduk';
+          }
+        | {
+            title: string;
+            description: string;
+            ctaText?: string | null;
+            ctaLink?: string | null;
+            /**
+             * Masukkan emoji atau nama icon untuk representasi visual (contoh: 🚚, 🛡️, ⚙️)
+             */
+            icon?: string | null;
+            style?: ('default' | 'highlight' | 'minimal') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'bannerLayanan';
+          }
+        | {
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richContent';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navbar-liquid".
+ */
+export interface NavbarLiquid {
+  id: number;
+  brandName: string;
+  logo?: (number | null) | Media;
+  links?:
+    | {
+        label: string;
+        url: string;
+        isActive?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer-global".
+ */
+export interface FooterGlobal {
+  id: number;
+  copyright: string;
+  links?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -192,6 +330,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'navbar-liquid';
+        value: number | NavbarLiquid;
+      } | null)
+    | ({
+        relationTo: 'footer-global';
+        value: number | FooterGlobal;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -274,6 +424,123 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  layout?:
+    | T
+    | {
+        heroUtama?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              description?: T;
+              ctaText?: T;
+              ctaLink?: T;
+              image?: T;
+              features?:
+                | T
+                | {
+                    title?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        heroSekunder?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              description?: T;
+              ctaText?: T;
+              ctaLink?: T;
+              image?: T;
+              alignment?: T;
+              id?: T;
+              blockName?: T;
+            };
+        gridPromosiProduk?:
+          | T
+          | {
+              title?: T;
+              items?:
+                | T
+                | {
+                    name?: T;
+                    description?: T;
+                    badge?: T;
+                    image?: T;
+                    link?: T;
+                    size?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        bannerLayanan?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              ctaText?: T;
+              ctaLink?: T;
+              icon?: T;
+              style?: T;
+              id?: T;
+              blockName?: T;
+            };
+        richContent?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navbar-liquid_select".
+ */
+export interface NavbarLiquidSelect<T extends boolean = true> {
+  brandName?: T;
+  logo?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        isActive?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer-global_select".
+ */
+export interface FooterGlobalSelect<T extends boolean = true> {
+  copyright?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

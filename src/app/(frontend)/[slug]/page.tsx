@@ -5,35 +5,49 @@ import config from '@/payload.config'
 import NavbarLiquid, { NavLink } from '@/components/NavbarLiquid'
 import FooterGlobal, { FooterLink } from '@/components/FooterGlobal'
 import RenderBlocks from '@/components/RenderBlocks'
-import './styles.css'
+import { redirect, notFound } from 'next/navigation'
+import '../styles.css'
 
-export default async function HomePage() {
+interface PageProps {
+  params: Promise<{
+    slug: string
+  }>
+}
+
+export default async function CMSPage(props: PageProps) {
+  const { slug } = await props.params
+
+  // Redirect to home if slug is home or main
+  if (slug === 'home' || slug === 'main') {
+    redirect('/')
+  }
+
   const headers = await getHeaders()
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
 
-  // 1. Fetch Navbar
+  // 1. Fetch Page
+  const pageRes = await payload.find({
+    collection: 'pages',
+    where: {
+      slug: { equals: slug },
+    },
+    limit: 1,
+  })
+
+  const pageData = pageRes.docs[0]
+  if (!pageData) {
+    notFound()
+  }
+
+  // 2. Fetch Navbar
   const navbarRes = await payload.find({
     collection: 'navbar-liquid',
     limit: 1,
   })
   const navbarData = navbarRes.docs[0]
 
-  // 2. Fetch Page with slug 'home' or 'main'
-  const pageRes = await payload.find({
-    collection: 'pages',
-    where: {
-      or: [
-        { slug: { equals: 'home' } },
-        { slug: { equals: 'main' } },
-      ],
-    },
-    limit: 1,
-  })
-  const pageData = pageRes.docs[0]
-
-  // 4. Fetch Footer
+  // 3. Fetch Footer
   const footerRes = await payload.find({
     collection: 'footer-global',
     limit: 1,
@@ -81,25 +95,7 @@ export default async function HomePage() {
       {/* Main Content Wrapper */}
       <main className="landing-main">
         {/* Dynamic Block Layout */}
-        <RenderBlocks layout={pageData?.layout} />
-
-        {/* Admin Quick Link Badge */}
-        <div className="admin-quick-bar">
-          <div className="admin-quick-card">
-            <div className="status-indicator-pulse"></div>
-            <p className="admin-status-text">
-              {user ? `Halo, ${user.email}!` : 'Konten sedang menggunakan fallback data default.'}
-            </p>
-            <a
-              className="admin-link-button"
-              href={payloadConfig.routes.admin}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {user ? 'Buka Admin Panel' : 'Masuk ke Admin Panel'}
-            </a>
-          </div>
-        </div>
+        <RenderBlocks layout={pageData.layout} />
       </main>
 
       {/* Footer Component */}
