@@ -1,8 +1,14 @@
 import React from 'react'
 import type { Page } from '@/payload-types'
-import HeroBento, { HeroFeature } from './HeroBento'
-import CategoryBentoGrid, { CategoryItem } from './CategoryBentoGrid'
-import RichText from './RichText'
+import HeroBento, { HeroFeature } from '@/components/blocks/HeroBento'
+import HeroSekunder from '@/components/blocks/HeroSekunder'
+import CategoryBentoGrid, { CategoryItem } from '@/components/blocks/CategoryBentoGrid'
+import BannerLayanan from '@/components/blocks/BannerLayanan'
+import RichText from '@/components/blocks/RichText'
+import ProductShowcase from '@/components/blocks/ProductShowcase'
+import FAQAccordion from '@/components/blocks/FAQAccordion'
+import FeaturesGrid from '@/components/blocks/FeaturesGrid'
+import RecentBlogs from '@/components/blocks/RecentBlogs'
 
 type LayoutBlock = NonNullable<Page['layout']>[number]
 
@@ -41,25 +47,16 @@ export default function RenderBlocks({ layout }: { layout: Page['layout'] }) {
 
           case 'heroSekunder':
             return (
-              <section key={block.id || index} className="hero-sekunder" data-alignment={block.alignment || 'left'}>
-                <div className="hero-sekunder-grid">
-                  <div className="hero-sekunder-content">
-                    <h2 className="hero-sekunder-title">{block.title}</h2>
-                    {block.subtitle && <span className="hero-sekunder-subtitle">{block.subtitle}</span>}
-                    <p className="hero-sekunder-desc">{block.description}</p>
-                    {block.ctaText && block.ctaLink && (
-                      <a href={block.ctaLink} className="hero-sekunder-cta">
-                        {block.ctaText}
-                      </a>
-                    )}
-                  </div>
-                  {getImageUrl(block.image) && (
-                    <div className="hero-sekunder-image">
-                      <img src={getImageUrl(block.image)} alt={block.title} />
-                    </div>
-                  )}
-                </div>
-              </section>
+              <HeroSekunder
+                key={block.id || index}
+                title={block.title}
+                subtitle={block.subtitle}
+                description={block.description}
+                ctaText={block.ctaText}
+                ctaLink={block.ctaLink}
+                imageUrl={getImageUrl(block.image)}
+                alignment={block.alignment}
+              />
             )
 
           case 'gridPromosiProduk':
@@ -80,20 +77,15 @@ export default function RenderBlocks({ layout }: { layout: Page['layout'] }) {
 
           case 'bannerLayanan':
             return (
-              <section key={block.id || index} className={`banner-layanan banner-layanan--${block.style || 'default'}`}>
-                <div className="banner-layanan-inner">
-                  {block.icon && <span className="banner-layanan-icon">{block.icon}</span>}
-                  <div className="banner-layanan-content">
-                    <h3 className="banner-layanan-title">{block.title}</h3>
-                    <p className="banner-layanan-desc">{block.description}</p>
-                  </div>
-                  {block.ctaText && block.ctaLink && (
-                    <a href={block.ctaLink} className="banner-layanan-cta">
-                      {block.ctaText}
-                    </a>
-                  )}
-                </div>
-              </section>
+              <BannerLayanan
+                key={block.id || index}
+                title={block.title}
+                description={block.description}
+                ctaText={block.ctaText}
+                ctaLink={block.ctaLink}
+                icon={block.icon}
+                style={block.style}
+              />
             )
 
           case 'richContent':
@@ -101,6 +93,60 @@ export default function RenderBlocks({ layout }: { layout: Page['layout'] }) {
               <section key={block.id || index} className="page-content-section">
                 {block.content && <RichText content={block.content} />}
               </section>
+            )
+
+          case 'productShowcase':
+            return (
+              <ProductShowcase
+                key={block.id || index}
+                title={block.title}
+                subtitle={block.subtitle}
+                products={block.products?.map((p) => ({
+                  name: p.name,
+                  description: p.description,
+                  price: p.price,
+                  imageUrl: getImageUrl(p.image),
+                  link: p.link,
+                  badge: p.badge,
+                }))}
+              />
+            )
+
+          case 'faqAccordion':
+            return (
+              <FAQAccordion
+                key={block.id || index}
+                title={block.title}
+                subtitle={block.subtitle}
+                faqs={block.faqs?.map((f) => ({
+                  question: f.question,
+                  answer: f.answer,
+                }))}
+              />
+            )
+
+          case 'featuresGrid':
+            return (
+              <FeaturesGrid
+                key={block.id || index}
+                title={block.title}
+                subtitle={block.subtitle}
+                features={block.features?.map((f) => ({
+                  icon: f.icon,
+                  title: f.title,
+                  description: f.description,
+                }))}
+              />
+            )
+
+          case 'recentBlogs':
+            return (
+              <RecentBlogs
+                key={block.id || index}
+                title={block.title}
+                subtitle={block.subtitle}
+                limit={block.limit}
+              />
             )
 
           default:

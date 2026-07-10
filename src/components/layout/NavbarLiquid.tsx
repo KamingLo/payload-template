@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useState } from 'react'
 import Image from 'next/image'
 
@@ -17,13 +16,13 @@ export interface NavbarLiquidProps {
 
 const defaultLinks: NavLink[] = [
   { label: 'Beranda', url: '#home', isActive: true },
-  { label: 'Produk Kami', url: '#categories', isActive: false },
-  { label: 'Tentang Kami', url: '#about', isActive: false },
-  { label: 'Hubungi Kami', url: '#contact', isActive: false },
+  { label: 'Fitur', url: '#features', isActive: false },
+  { label: 'Katalog', url: '#products', isActive: false },
+  { label: 'FAQ', url: '#faq', isActive: false },
 ]
 
 export default function NavbarLiquid({
-  brandName = 'Arang & Brisket',
+  brandName = 'Template Merek',
   logoUrl,
   links = defaultLinks,
 }: NavbarLiquidProps) {
@@ -48,7 +47,7 @@ export default function NavbarLiquid({
         <button 
           className={`navbar-toggle ${isOpen ? 'is-active' : ''}`}
           onClick={toggleMenu}
-          aria-label="Toggle navigation menu"
+          aria-label="Buka menu navigasi"
           aria-expanded={isOpen}
         >
           <span className="hamburger-line"></span>

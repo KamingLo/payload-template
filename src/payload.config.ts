@@ -8,6 +8,7 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
+import { Blogs } from './collections/Blogs'
 import { NavbarLiquid } from './collections/components/global/NavbarLiquid'
 import { FooterGlobal } from './collections/components/global/FooterGlobal'
 
@@ -25,7 +26,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages, NavbarLiquid, FooterGlobal],
+  collections: [Users, Media, Pages, Blogs, NavbarLiquid, FooterGlobal],
 
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

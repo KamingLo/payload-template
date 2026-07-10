@@ -13,12 +13,12 @@ export interface FooterGlobalProps {
 const defaultLinks: FooterLink[] = [
   { label: 'Kebijakan Privasi', url: '#privacy' },
   { label: 'Syarat & Ketentuan', url: '#terms' },
-  { label: 'Hubungan Kemitraan', url: '#partnership' },
-  { label: 'F.A.Q', url: '#faq' },
+  { label: 'Tentang Kami', url: '#about' },
+  { label: 'Kontak', url: '#contact' },
 ]
 
 export default function FooterGlobal({
-  copyright = '© 2026 Arang Premium & Brisket. Hak Cipta Dilindungi Undang-Undang.',
+  copyright = '© 2026 Template Web. Hak Cipta Dilindungi Undang-Undang.',
   links = defaultLinks,
 }: FooterGlobalProps) {
   return (
@@ -26,9 +26,9 @@ export default function FooterGlobal({
       <div className="footer-container">
         <div className="footer-top">
           <div className="footer-brand">
-            <span className="footer-logo">ARANG & BRISKET</span>
+            <span className="footer-logo">LOGO TEMPLATE</span>
             <p className="footer-brand-desc">
-              Penyedia arang kelapa premium bersertifikat ekspor dan kuliner asap brisket autentik yang diasap lambat menggunakan kayu rambutan alami.
+              Sebuah kerangka halaman (page builder template) modern dengan desain flat, minimalis, dan borderless yang sepenuhnya dikonfigurasi melalui Payload CMS.
             </p>
           </div>
           <div className="footer-nav">
@@ -49,9 +49,9 @@ export default function FooterGlobal({
         <div className="footer-bottom">
           <p className="footer-copy">{copyright}</p>
           <div className="footer-socials">
-            <a href="#instagram" className="social-link" aria-label="Instagram">Instagram</a>
-            <a href="#whatsapp" className="social-link" aria-label="WhatsApp">WhatsApp</a>
-            <a href="#email" className="social-link" aria-label="Email">Email</a>
+            <a href="#social1" className="social-link" aria-label="Social Link 1">Medsos 1</a>
+            <a href="#social2" className="social-link" aria-label="Social Link 2">Medsos 2</a>
+            <a href="#social3" className="social-link" aria-label="Social Link 3">Medsos 3</a>
           </div>
         </div>
       </div>

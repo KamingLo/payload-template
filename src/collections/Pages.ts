@@ -4,6 +4,10 @@ import { HeroSekunderBlock } from './components/HeroSekunder'
 import { GridPromosiProdukBlock } from './components/CategoryBentoGrid'
 import { BannerLayananBlock } from './components/BannerLayanan'
 import { RichContentBlock } from './components/RichContent'
+import { ProductShowcaseBlock } from './components/ProductShowcase'
+import { FAQAccordionBlock } from './components/FAQAccordion'
+import { FeaturesGridBlock } from './components/FeaturesGrid'
+import { RecentBlogsBlock } from './components/RecentBlogs'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -39,6 +43,10 @@ export const Pages: CollectionConfig = {
         GridPromosiProdukBlock,
         BannerLayananBlock,
         RichContentBlock,
+        ProductShowcaseBlock,
+        FAQAccordionBlock,
+        FeaturesGridBlock,
+        RecentBlogsBlock,
       ],
     },
   ],

@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    blogs: Blog;
     'navbar-liquid': NavbarLiquid;
     'footer-global': FooterGlobal;
     'payload-kv': PayloadKv;
@@ -82,6 +83,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    blogs: BlogsSelect<false> | BlogsSelect<true>;
     'navbar-liquid': NavbarLiquidSelect<false> | NavbarLiquidSelect<true>;
     'footer-global': FooterGlobalSelect<false> | FooterGlobalSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -258,8 +260,98 @@ export interface Page {
             blockName?: string | null;
             blockType: 'richContent';
           }
+        | {
+            title: string;
+            subtitle?: string | null;
+            products?:
+              | {
+                  name: string;
+                  description?: string | null;
+                  price?: string | null;
+                  image?: (number | null) | Media;
+                  link?: string | null;
+                  badge?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'productShowcase';
+          }
+        | {
+            title: string;
+            subtitle?: string | null;
+            faqs?:
+              | {
+                  question: string;
+                  answer: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faqAccordion';
+          }
+        | {
+            title: string;
+            subtitle?: string | null;
+            features?:
+              | {
+                  icon?: string | null;
+                  title: string;
+                  description: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'featuresGrid';
+          }
+        | {
+            title: string;
+            subtitle?: string | null;
+            limit?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'recentBlogs';
+          }
       )[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogs".
+ */
+export interface Blog {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  featuredImage: number | Media;
+  /**
+   * Pilih beberapa foto tambahan untuk ditampilkan di bagian galeri artikel.
+   */
+  gallery?: (number | Media)[] | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  publishedAt: string;
+  category?: string | null;
+  author?: (number | null) | User;
   updatedAt: string;
   createdAt: string;
 }
@@ -334,6 +426,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'blogs';
+        value: number | Blog;
       } | null)
     | ({
         relationTo: 'navbar-liquid';
@@ -504,7 +600,83 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        productShowcase?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              products?:
+                | T
+                | {
+                    name?: T;
+                    description?: T;
+                    price?: T;
+                    image?: T;
+                    link?: T;
+                    badge?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        faqAccordion?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              faqs?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        featuresGrid?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              features?:
+                | T
+                | {
+                    icon?: T;
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        recentBlogs?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              limit?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogs_select".
+ */
+export interface BlogsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  featuredImage?: T;
+  gallery?: T;
+  content?: T;
+  publishedAt?: T;
+  category?: T;
+  author?: T;
   updatedAt?: T;
   createdAt?: T;
 }

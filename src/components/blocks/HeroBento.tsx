@@ -17,22 +17,21 @@ export interface HeroBentoProps {
 }
 
 const defaultFeatures: HeroFeature[] = [
-  { title: 'Kadar Karbon', value: '85%+' },
-  { title: 'Waktu Bakar', value: '5+ Jam' },
-  { title: 'Pengasapan Lambat', value: '12 Jam' },
-  { title: 'Kayu Alami', value: 'Rambutan' },
+  { title: 'Indikator Utama', value: '99%+' },
+  { title: 'Efisiensi Kerja', value: '10x Lipat' },
+  { title: 'Dukungan Teknis', value: '24/7' },
+  { title: 'Bahan Pilihan', value: 'Organik' },
 ]
 
 export default function HeroBento({
-  title = 'Arang Premium & Brisket',
-  subtitle = 'Kualitas Ekspor & Cita Rasa Autentik',
-  description = 'Memadukan arang kelapa kualitas terbaik dunia untuk pembakaran sempurna tanpa asap, dengan brisket premium yang diasap lambat hingga lumer di mulut. Diciptakan khusus untuk pencinta kuliner sejati.',
-  ctaText = 'Jelajahi Produk',
+  title = 'Judul Hero Utama Template',
+  subtitle = 'Sub-tagline Kategori Produk / Jasa',
+  description = 'Berikan deskripsi ringkas yang menarik di sini tentang keunikan produk Anda. Template ini didesain flat, borderless, dan memiliki spasi lega ala Apple untuk menonjolkan keindahan foto dan teks.',
+  ctaText = 'Jelajahi Fitur',
   ctaLink = '#categories',
   imageUrl,
   features = defaultFeatures,
 }: HeroBentoProps) {
-  // If no imageUrl is provided, we use a beautiful default unsplash image
   const displayImage = imageUrl || 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=1200'
 
   return (
@@ -57,7 +56,7 @@ export default function HeroBento({
           <div className="hero-image-wrapper">
             <Image
               src={displayImage}
-              alt="Arang & Brisket Premium"
+              alt="Visual Banner Utama"
               fill
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -78,8 +77,8 @@ export default function HeroBento({
         {/* Promo Card / Dynamic visual element */}
         <div className="hero-card hero-promo-card">
           <div className="promo-glow"></div>
-          <span className="promo-badge">HOT PRODUCT</span>
-          <h3 className="promo-text">100% Organik & Tanpa Bahan Kimia Tambahan</h3>
+          <span className="promo-badge">PROMO UTAMA</span>
+          <h3 className="promo-text">100% Dapat Disesuaikan Melalui Admin Panel Payload CMS</h3>
         </div>
 
       </div>
