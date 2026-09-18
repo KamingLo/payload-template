@@ -2,10 +2,8 @@ import React from 'react'
 import type { Page } from '@/payload-types'
 import HeroBento, { HeroFeature } from '@/components/blocks/HeroBento'
 import HeroSekunder from '@/components/blocks/HeroSekunder'
-import CategoryBentoGrid, { CategoryItem } from '@/components/blocks/CategoryBentoGrid'
 import BannerLayanan from '@/components/blocks/BannerLayanan'
 import RichText from '@/components/blocks/RichText'
-import ProductShowcase from '@/components/blocks/ProductShowcase'
 import FAQAccordion from '@/components/blocks/FAQAccordion'
 import FeaturesGrid from '@/components/blocks/FeaturesGrid'
 import RecentBlogs from '@/components/blocks/RecentBlogs'
@@ -59,22 +57,6 @@ export default function RenderBlocks({ layout }: { layout: Page['layout'] }) {
               />
             )
 
-          case 'gridPromosiProduk':
-            return (
-              <CategoryBentoGrid
-                key={block.id || index}
-                title={block.title || undefined}
-                categories={block.items?.map((item) => ({
-                  name: item.name,
-                  description: item.description || undefined,
-                  badge: item.badge || undefined,
-                  imageUrl: getImageUrl(item.image),
-                  link: item.link || undefined,
-                  size: item.size,
-                })) as CategoryItem[]}
-              />
-            )
-
           case 'bannerLayanan':
             return (
               <BannerLayanan
@@ -93,23 +75,6 @@ export default function RenderBlocks({ layout }: { layout: Page['layout'] }) {
               <section key={block.id || index} className="page-content-section">
                 {block.content && <RichText content={block.content} />}
               </section>
-            )
-
-          case 'productShowcase':
-            return (
-              <ProductShowcase
-                key={block.id || index}
-                title={block.title}
-                subtitle={block.subtitle}
-                products={block.products?.map((p) => ({
-                  name: p.name,
-                  description: p.description,
-                  price: p.price,
-                  imageUrl: getImageUrl(p.image),
-                  link: p.link,
-                  badge: p.badge,
-                }))}
-              />
             )
 
           case 'faqAccordion':

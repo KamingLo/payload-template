@@ -15,10 +15,9 @@ export interface NavbarLiquidProps {
 }
 
 const defaultLinks: NavLink[] = [
-  { label: 'Beranda', url: '#home', isActive: true },
-  { label: 'Fitur', url: '#features', isActive: false },
-  { label: 'Katalog', url: '#products', isActive: false },
-  { label: 'FAQ', url: '#faq', isActive: false },
+  { label: 'Beranda', url: '/', isActive: true },
+  { label: 'Tentang Kami', url: '/about-us', isActive: false },
+  { label: 'Blog', url: '/blog', isActive: false },
 ]
 
 export default function NavbarLiquid({

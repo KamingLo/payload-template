@@ -95,8 +95,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    settings: Setting;
+  };
+  globalsSelect: {
+    settings: SettingsSelect<false> | SettingsSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -211,23 +215,6 @@ export interface Page {
           }
         | {
             title: string;
-            items?:
-              | {
-                  name: string;
-                  description?: string | null;
-                  badge?: string | null;
-                  image?: (number | null) | Media;
-                  link?: string | null;
-                  size?: ('small' | 'medium' | 'large') | null;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'gridPromosiProduk';
-          }
-        | {
-            title: string;
             description: string;
             ctaText?: string | null;
             ctaLink?: string | null;
@@ -259,24 +246,6 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'richContent';
-          }
-        | {
-            title: string;
-            subtitle?: string | null;
-            products?:
-              | {
-                  name: string;
-                  description?: string | null;
-                  price?: string | null;
-                  image?: (number | null) | Media;
-                  link?: string | null;
-                  badge?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'productShowcase';
           }
         | {
             title: string;
@@ -563,24 +532,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        gridPromosiProduk?:
-          | T
-          | {
-              title?: T;
-              items?:
-                | T
-                | {
-                    name?: T;
-                    description?: T;
-                    badge?: T;
-                    image?: T;
-                    link?: T;
-                    size?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
         bannerLayanan?:
           | T
           | {
@@ -597,25 +548,6 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               content?: T;
-              id?: T;
-              blockName?: T;
-            };
-        productShowcase?:
-          | T
-          | {
-              title?: T;
-              subtitle?: T;
-              products?:
-                | T
-                | {
-                    name?: T;
-                    description?: T;
-                    price?: T;
-                    image?: T;
-                    link?: T;
-                    badge?: T;
-                    id?: T;
-                  };
               id?: T;
               blockName?: T;
             };
@@ -753,6 +685,32 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: number;
+  darkModeIcon?: (number | null) | Media;
+  darkModeLogo?: (number | null) | Media;
+  lightModeIcon?: (number | null) | Media;
+  lightModeLogo?: (number | null) | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  darkModeIcon?: T;
+  darkModeLogo?: T;
+  lightModeIcon?: T;
+  lightModeLogo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

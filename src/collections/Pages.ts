@@ -1,10 +1,8 @@
 import type { CollectionConfig } from 'payload'
 import { HeroUtamaBlock } from './components/HeroBento'
 import { HeroSekunderBlock } from './components/HeroSekunder'
-import { GridPromosiProdukBlock } from './components/CategoryBentoGrid'
 import { BannerLayananBlock } from './components/BannerLayanan'
 import { RichContentBlock } from './components/RichContent'
-import { ProductShowcaseBlock } from './components/ProductShowcase'
 import { FAQAccordionBlock } from './components/FAQAccordion'
 import { FeaturesGridBlock } from './components/FeaturesGrid'
 import { RecentBlogsBlock } from './components/RecentBlogs'
@@ -40,10 +38,8 @@ export const Pages: CollectionConfig = {
       blocks: [
         HeroUtamaBlock,
         HeroSekunderBlock,
-        GridPromosiProdukBlock,
         BannerLayananBlock,
         RichContentBlock,
-        ProductShowcaseBlock,
         FAQAccordionBlock,
         FeaturesGridBlock,
         RecentBlogsBlock,

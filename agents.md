@@ -20,12 +20,18 @@ File ini menyimpan instruksi dan aturan struktur folder untuk Payload CMS Collec
 
 ```
 src/collections/
+├── Blogs.ts                   # Fitur Utama (Blogs)
 ├── Media.ts                   # Fitur Utama (Media Upload)
 ├── Pages.ts                   # Fitur Utama (Pages)
 ├── Users.ts                   # Fitur Utama (User Auth)
 └── components/
-    ├── CategoryBentoGrid.ts   # Komponen Kecil
+    ├── BannerLayanan.ts       # Komponen Kecil
+    ├── FAQAccordion.ts        # Komponen Kecil
+    ├── FeaturesGrid.ts        # Komponen Kecil
     ├── HeroBento.ts           # Komponen Kecil
+    ├── HeroSekunder.ts        # Komponen Kecil
+    ├── RecentBlogs.ts         # Komponen Kecil
+    ├── RichContent.ts         # Komponen Kecil
     └── global/
         ├── FooterGlobal.ts    # Komponen Global Kecil
         └── NavbarLiquid.ts    # Komponen Global Kecil

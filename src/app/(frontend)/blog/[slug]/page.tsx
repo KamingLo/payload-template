@@ -107,11 +107,11 @@ export default async function BlogPage(props: PageProps) {
       {/* Main Blog Post Content */}
       <main className="landing-main blog-post-page">
         {/* Back Link */}
-        <a href="/#blog" className="blog-back-link">
+        <a href="/blog" className="blog-back-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
-          Kembali ke Beranda
+          Kembali ke Daftar Blog
         </a>
 
         <article className="blog-article">
